@@ -7,8 +7,8 @@ const App = (props: any) => (
   <>
     <Router {...props}>
       <Stack {...props} key="root">
-        <Scene key="login" component={ProductLists} title="ProductLists" />
-        <Scene key="register" component={ProductDetails} title="Register" />
+        <Scene key="productLists" component={ProductLists} title="ProductLists" />
+        <Scene key="productDetails" component={ProductDetails} title="ProductDetails" />
         {props.children}
       </Stack>
     </Router>
