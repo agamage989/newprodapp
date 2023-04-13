@@ -2,6 +2,7 @@ import React from 'react';
 import {Router, Stack, Scene} from 'react-native-router-flux';
 import {ProductLists} from './app/screens/productsList';
 import {ProductDetails} from './app/screens/productsDetails';
+import { Provider } from 'react-redux'
 
 const App = (props: any) => (
   <>
