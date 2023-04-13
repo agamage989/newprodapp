@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native/types";
+import {StyleSheet} from 'react-native/types';
 
 export default StyleSheet.create({
-    headerContainer: {},
-    headerTitleContainer: {},
-    headerTitle: {},
-    rtlBtnActionContainer: {},
-    rtlButton: {}
+  headerContainer: {},
+  headerTitleContainer: {},
+  headerTitle: {},
+  rtlBtnActionContainer: {},
+  rtlButton: {},
 });

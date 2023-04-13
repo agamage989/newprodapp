@@ -1,8 +1,8 @@
-import { StyleSheet } from "react-native/types";
+import {StyleSheet} from 'react-native/types';
 
 export default StyleSheet.create({
-    discountContainer: {},
-    discountText: {},
-    promotionalTextContainer: {},
-    promotionalText: {}
+  discountContainer: {},
+  discountText: {},
+  promotionalTextContainer: {},
+  promotionalText: {},
 });
