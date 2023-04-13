@@ -6,4 +6,6 @@ export default StyleSheet.create({
   headerTitle: {},
   rtlBtnActionContainer: {},
   rtlButton: {},
+  cancelBtnActionContainer: {},
+  cancelButton: {},
 });

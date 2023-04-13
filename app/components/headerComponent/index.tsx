@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native/types';
+import {Image, Text, TouchableOpacity, View} from 'react-native/types';
 
 import styles from './styles';
 
@@ -18,6 +18,13 @@ export const HeaderComponent = (props: {
         <View style={styles.rtlBtnActionContainer}>
           <TouchableOpacity style={styles.rtlButton} onPress={() => {}}>
             {'RTL'}
+          </TouchableOpacity>
+        </View>
+      )}
+      {!rtlEnabled && (
+        <View style={styles.cancelBtnActionContainer}>
+          <TouchableOpacity style={styles.cancelButton} onPress={() => {}}>
+            <Image source={require('')} />
           </TouchableOpacity>
         </View>
       )}
