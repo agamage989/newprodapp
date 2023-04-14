@@ -2,10 +2,12 @@ import {configureStore} from '@reduxjs/toolkit';
 import {useDispatch} from 'react-redux';
 
 import ProductReducer from '../reducer/products';
+import MetaReducer from '../reducer/meta';
 
 export const store = configureStore({
   reducer: {
-    productReducer: ProductReducer,
+    products: ProductReducer,
+    meta: MetaReducer,
   },
 });
 

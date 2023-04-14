@@ -4,6 +4,7 @@ import {fetchAllProducts} from '../thunk';
 
 const initialState = {
   data: [],
+  total: 0,
   fetching: false,
   selectedProduct: {},
 };
@@ -11,15 +12,23 @@ const initialState = {
 export const ProductReducer = createSlice({
   name: 'products',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
-        console.log("state", state);
-        console.log("action", action);
+    builder
+      .addCase(fetchAllProducts.pending, (state: any) => {
         // state change here
-        state.data = action.payload;
-    });
+        state.fetching = true;
+      })
+      .addCase(fetchAllProducts.fulfilled, (state, action) => {
+        // state change here
+        state.fetching = false;
+        state.data = action.payload?.products;
+        state.total = action.payload?.total;
+      })
+      .addCase(fetchAllProducts.rejected, (state: any, action) => {
+        // state change here
+        state.fetching = false;
+      });
   },
 });
 

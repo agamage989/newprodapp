@@ -4,7 +4,11 @@ import {productsAPI} from '../api';
 export const fetchAllProducts = createAsyncThunk(
   'products/fetchAll',
   async () => {
-    const response = await productsAPI();
-    return response.data;
+    try {
+      const response = await productsAPI();
+      return response?.json();
+    } catch (ex) {
+      return null;
+    }
   },
 );
