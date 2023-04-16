@@ -21,6 +21,7 @@ export const ProductReducer = createSlice({
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         // state change here
+        console.log("action.payload", action.payload);
         state.fetching = false;
         state.data = action.payload?.products;
         state.total = action.payload?.total;

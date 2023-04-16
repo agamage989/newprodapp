@@ -13,8 +13,11 @@ export const ProductLists = () => {
   const products = useSelector((state: any) => state.products.data);
 
   useEffect(() => {
+    console.log("loaded");
     dispatch(fetchAllProducts());
   }, []);
+
+  console.log("products", products);
 
   return (
     <>
@@ -29,7 +32,11 @@ export const ProductLists = () => {
             {products
               .filter((_: any, index: number) => index % 2 !== 0)
               .map((productItem: any, index: number) => (
-                <ProductListItemComponent index={index} product={productItem} />
+                <ProductListItemComponent
+                  key={`${index}-prod-list-item`}
+                  index={index}
+                  product={productItem}
+                />
               ))}
           </Col>
           <Col>

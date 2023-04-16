@@ -10,8 +10,13 @@ import {ScreenHeader} from './app/components/screenHeaderComponent';
 const App = (props: any) => (
   <>
     <Provider store={store}>
-      <Router {...props} navigationBarStyle={{backgroundColor: '#894927'}}>
-        <Stack {...props} key="root">
+      <Router {...props}>
+        <Stack
+          {...props}
+          key="root"
+          navigationBarStyle={{
+            backgroundColor: '#894927',
+          }}>
           <Scene
             key="productLists"
             component={ProductLists}
@@ -19,14 +24,14 @@ const App = (props: any) => (
               <ScreenHeader {...prop} title="Products List" isPromotionActive />
             )}
           />
-          <Scene
+          {/* <Scene
             key="productDetails"
             component={ProductDetails}
             back
             renderTitle={prop => (
               <ScreenHeader {...prop} title="Product Detail" />
             )}
-          />
+          /> */}
           {props.children}
         </Stack>
       </Router>

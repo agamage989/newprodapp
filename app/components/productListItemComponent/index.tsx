@@ -40,7 +40,7 @@ export const ProductListItemComponent = (props: {
   });
 
   return (
-    <View style={styles.productCol}>
+    <View style={styles.productCol} key={`${index}-product-item`}>
       <TouchableOpacity
         onPress={() => {
           if (Actions.currentScene !== 'productDetails') {
@@ -49,14 +49,14 @@ export const ProductListItemComponent = (props: {
         }}
         key={`${index}-product`}
         style={styles.productContainer}>
-        <Row style={styles.productInfoRow} pointerEvents="none">
+        <Row style={styles.productInfoRow}>
           <Image
             source={{uri: product.thumbnail}}
             style={[styles.image, {...imageSizes}]}
             resizeMode="cover"
           />
         </Row>
-        <Row style={styles.productInfoRow} pointerEvents="none">
+        <Row style={styles.productInfoRow}>
           <Col>
             <View style={styles.categoryContainer}>
               <Text style={styles.category}>
