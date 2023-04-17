@@ -19,4 +19,9 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
+  linearGradient: {
+    flex: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 50,
+  }
 });

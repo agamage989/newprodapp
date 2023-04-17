@@ -3,8 +3,9 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   promotionalContainer: {
     flex: 0,
-    backgroundColor: '#aa39a6',
+    // backgroundColor: '#aa39a6',
     padding: 10,
+    paddingTop: 50,
   },
   discountContainer: {
     flex: 0,

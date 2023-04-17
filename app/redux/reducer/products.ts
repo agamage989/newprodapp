@@ -2,11 +2,25 @@ import {createSlice} from '@reduxjs/toolkit';
 
 import {fetchAllProducts} from '../thunk';
 
+import { DateTime } from 'luxon';
+
 const initialState = {
   data: [],
   total: 0,
   fetching: false,
-  selectedProduct: {},
+  reviews: [{
+    customerName: 'Regina',
+    title: 'Very nice product',
+    comment: 'this is a very nice product from this site.',
+    date: DateTime.now().toMillis(),
+    rate: 3.2
+  }, {
+    customerName: 'Mathan',
+    title: 'Amazing device',
+    comment: 'this is a very nice product from this site.',
+    date: DateTime.now().toMillis(),
+    rate: 4.6
+  }]
 };
 
 export const ProductReducer = createSlice({
@@ -21,7 +35,6 @@ export const ProductReducer = createSlice({
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         // state change here
-        console.log("action.payload", action.payload);
         state.fetching = false;
         state.data = action.payload?.products;
         state.total = action.payload?.total;

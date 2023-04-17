@@ -1,11 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
-import {Col, Row} from 'react-native-easy-grid';
+import React, { useEffect, useState } from 'react';
+import { Alert, Dimensions, Image, ScrollView, StyleSheet, Text, ToastAndroid, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { Col, Row } from 'react-native-easy-grid';
+import Counter from 'react-native-counters';
+import { FlatList } from 'react-native-gesture-handler';
+import { ReviewComponent } from '../components/reviewComponent';
+import { ReviewHeaderComponent } from '../components/reviewHeaderComponent';
+import { useSelector } from 'react-redux';
+
+import LinearGradient from 'react-native-linear-gradient';
 
 export const ProductDetails = (props: any) => {
-  const {product} = props || {};
+  const { product } = props || {};
   const [imageSizes, setImageSize] = useState({});
-  // const [updatedAmount, setUpdatedAmount] = useState(product?.amount);
+  const [updatedAmount, setUpdatedAmount] = useState(product?.price);
+  const reviews = useSelector((state: any) => state?.products?.reviews) || [];
+  const locale = useSelector((state: any) => state.meta.locale);
   const width = Dimensions.get('window').width;
   const getImageSize = () => {
     Image.getSize(product.thumbnail, (_width, _height) => {
@@ -18,15 +27,15 @@ export const ProductDetails = (props: any) => {
 
   useEffect(() => {
     getImageSize();
-  });
+  }, []);
 
   return (
-    <>
+    <ScrollView style={styles.productColumn}>
       <View style={styles.productDetailContainer}>
         <Row style={styles.productImageRow}>
           <Image
-            source={{uri: product.thumbnail}}
-            style={[styles.image, {...imageSizes}]}
+            source={{ uri: product.thumbnail }}
+            style={[styles.image, { ...imageSizes }]}
             resizeMode="cover"
           />
         </Row>
@@ -43,7 +52,7 @@ export const ProductDetails = (props: any) => {
           </Col>
           <Col>
             <View style={styles.amountContainer}>
-              <Text style={styles.amount}>{`$${product.price}`}</Text>
+              <Text style={styles.amount}>{`$ ${product.price}`}</Text>
             </View>
           </Col>
         </Row>
@@ -53,42 +62,65 @@ export const ProductDetails = (props: any) => {
           </Col>
         </Row>
         <Row style={styles.productInfoRow}>
-          <Col>
+          <Col size={0.1}>
             <Text>{''}</Text>
           </Col>
-          <Col>
+          <Col size={0.9}>
             <Row>
-              <Col style={{alignContent: 'flex-end', alignItems: 'flex-end'}}>
+              <Col style={styles.column}>
                 <View>
                   <Text
-                    style={{
-                      fontSize: 30,
-                      fontWeight: 'bold',
-                      height: 32,
-                    }}>{`$${product.price}`}</Text>
+                    style={styles.updatedAmountText}>{`$ ${updatedAmount}`}</Text>
                 </View>
               </Col>
-              <Col style={{alignContent: 'flex-end', alignItems: 'flex-end'}}>
+              <Col style={styles.column}>
                 <View>
-                  <Text>{`$${product.price}`}</Text>
+                  <Counter start={1} min={1} buttonStyle={{ borderColor: '#bbb' }} buttonTextStyle={{ color: '#bbb' }} countTextStyle={{ color: '#444' }} onChange={(number: any, type: any) => setUpdatedAmount(number * parseFloat(product.price))} />
                 </View>
               </Col>
             </Row>
           </Col>
         </Row>
+        <Row>
+          <Col style={styles.buttonRowContainer}>
+            <TouchableOpacity style={styles.buttonContainer} onPress={() => Alert.alert(locale.t("SUCCESFUL_PURCHASE"))}>
+              <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
+                <Text style={styles.buttonText}>
+                  {locale.t("BUY_IT_BUTTON")}
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </Col>
+        </Row>
+        <Row style={styles.reviewsHeaderRow}>
+          <Col>
+            <ReviewHeaderComponent rating={product.rating} />
+          </Col>
+        </Row>
+        <Row style={styles.reviewsInfoRow}>
+          <FlatList
+            data={reviews}
+            renderItem={(data) => (<ReviewComponent review={data.item} />)}
+          />
+        </Row>
       </View>
-    </>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  column: { alignContent: 'flex-end', alignItems: 'flex-end' },
+  productColumn: { flex: 1, flexDirection: 'column', backgroundColor: '#fff', marginTop: 40, paddingBottom: 50 },
   productDetailContainer: {
-    flex: 0,
+    flex: 1,
     alignContent: 'flex-start',
     alignItems: 'flex-start',
     alignSelf: 'flex-start',
+    backgroundColor: '#fff'
   },
-  productInfoRow: {flex: 0, padding: 5, paddingHorizontal: 10},
+  productInfoRow: { flex: 0, padding: 5, paddingHorizontal: 10 },
+  reviewsHeaderRow: { flex: 0, padding: 5, paddingHorizontal: 20 },
+  reviewsInfoRow: { flex: 0, padding: 5, paddingHorizontal: 10, marginBottom: 20 },
   productContainer: {
     backgroundColor: '#fff',
   },
@@ -125,5 +157,29 @@ const styles = StyleSheet.create({
     flex: 0,
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  updatedAmountText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    height: 32,
+  },
+  buttonRowContainer: { alignContent: 'center', alignItems: 'center' },
+  buttonContainer: {
+    width: '90%',
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 50,
+    marginVertical: 15,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontFamily: 'Gill Sans',
+    textAlign: 'center',
+    margin: 10,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
   },
 });

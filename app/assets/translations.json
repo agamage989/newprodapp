@@ -1,0 +1,21 @@
+{
+    "en-US": {
+        "PRODUCT_LIST_HEADER": "Product List",
+        "DISCOUNT": "DISCOUNT_AMOUNT Discount",
+        "DISCOUNT_SUBTEXT": "Enjoy it now!",
+        "PRODUCT_DETAIL_HEADER": "Product Details",
+        "BUY_IT_BUTTON": "Buy It!",
+        "SUCCESFUL_PURCHASE": "Purchase Confirmed",
+        "REVIEWS_SUBTEXT": "Based on customer reviews"
+    },
+    "es-US": {
+        "PRODUCT_LIST_HEADER": "Lista de productos",
+        "DISCOUNT": "DISCOUNT_AMOUNT de descuento",
+        "DISCOUNT_SUBTEXT": "¡Disfrútalo ahora!",
+        "PRODUCT_DETAIL_HEADER": "Detalles de producto",
+        "BUY_IT_BUTTON": "¡Cómpralo!",
+        "SUCCESFUL_PURCHASE": "Compra confirmada",
+        "REVIEWS_SUBTEXT": "Basado en opiniones de clientes"
+
+    }
+}

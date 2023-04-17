@@ -8,16 +8,15 @@ import {ScrollView, StyleSheet, Text} from 'react-native';
 import {ProductListItemComponent} from '../components/productListItemComponent';
 import {Col, Row} from 'react-native-easy-grid';
 
+
 export const ProductLists = () => {
   const dispatch = useAppDispatch();
   const products = useSelector((state: any) => state.products.data);
+  const locale = useSelector((state: any) => state.meta.locale);
 
   useEffect(() => {
-    console.log("loaded");
     dispatch(fetchAllProducts());
   }, []);
-
-  console.log("products", products);
 
   return (
     <>
